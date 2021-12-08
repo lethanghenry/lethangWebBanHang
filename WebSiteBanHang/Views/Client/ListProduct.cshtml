@@ -1,0 +1,343 @@
+﻿@using WebSiteBanHang.Models
+
+
+@model IEnumerable<WebSiteBanHang.Models.Product>
+@{
+    ViewBag.Title = "ListProduct";
+    Layout = "~/Views/Shared/_Layout_Client.cshtml";
+    List<Product> liProduct = ViewBag.listPro as List<Product>;
+    List<Category> liCategory = ViewBag.listCate as List<Category>;
+    List<UserProduct> liUser = ViewBag.lisUser as List<UserProduct>;
+    List<Product> liMax = ViewBag.listMax as List<Product>;
+    List<Product> liSearch = ViewBag.listSearchProduct as List<Product>;
+}
+<style>
+    .banner {
+        background: white;
+        height: 200px;
+    }
+
+    .contentleft {
+        background: white;
+    }
+
+    .contentright {
+        background: white;
+        height: 1000px;
+    }
+
+    .a {
+        font-size: 70px;
+    }
+
+    .funcontentleft {
+        height: 70px;
+        background: white;
+    }
+
+    .show {
+        float: left;
+        padding-top: 25px;
+        margin: 0px;
+    }
+
+    /*    .danhsach {
+            padding-right: 0px;
+            margin: 0px;
+        }
+    */
+    .dropdown {
+        height: 50px;
+        background: white;
+        color: black;
+    }
+
+    .pic {
+        background: white;
+    }
+
+    .menu3 a {
+        position: relative;
+        text-decoration: none;
+    }
+
+    .menu3 ul {
+        list-style: none;
+    }
+
+        .menu3 ul li a span {
+            position: absolute;
+            bottom: 0;
+            display: block;
+            background: black;
+            transition: transform ease-in-out 0.5s;
+            width: 100%;
+            height: 1px;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition-delay: 0s;
+        }
+
+        .menu3 ul li a:hover span {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+    .menuProductMax a {
+        position: relative;
+        color: black;
+    }
+
+    .menuProductMax ul {
+        list-style: none;
+    }
+
+    .picturebanner {
+        overflow: hidden;
+    }
+
+        .picturebanner img {
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .picturebanner:hover img {
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+
+    .img-fluid {
+        z-index: 4;
+        float: left;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .img-top:hover .caption {
+        opacity: 1;
+        transform: translateY(-100px);
+        -webkit-transform: translateY(-120px);
+        -moz-transform: translateY(0px);
+        -ms-transform: translateY(-100px);
+        -o-transform: translateY(-100px);
+    }
+
+    .caption {
+        cursor: pointer;
+        position: absolute;
+        opacity: 0;
+        top: 300px;
+        left: 30px;
+        -webkit-transition: all 0.15s ease-in-out;
+        -moz-transition: all 0.15s ease-in-out;
+        -o-transition: all 0.15s ease-in-out;
+        /* -ms-transition: all 0.15s ease-in-out;*/
+
+        transition: all 0.15s ease-in-out;
+    }
+
+    .blur {
+        background-color: black;
+        height: 80px;
+        width: 260px;
+        z-index: 5;
+        position: absolute;
+    }
+
+    .caption-text p {
+        color: white;
+    }
+
+    .caption-text {
+        z-index: 8;
+        position: relative;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <div class="banner row d-flex justify-content-center align-items-center ">
+            <div class="col-md-9 text-left p-0">
+                <h1><strong class="a">SHOP</strong></h1>
+            </div>
+            <div class="col-md-3 text-right p-0">
+                <h2>Home</h2>
+            </div>
+        </div>
+
+        <div class="content row">
+            <div class="contentleft col-md-9">
+                <div class="funcontentleft row ">
+                    <div class="show col-md-4 text-left ">
+                        <label>Showing 1-12 of 78 result</label>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <div class="dropdown text-right">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Default Sort
+                            </button>
+                            <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="/Client/ListProduct?sortOrder=1">Default Sort</a></li>
+                                <li><a class="dropdown-item" href="/Client/ListProduct?sortOrder=2">Sort by popularity</a></li>
+                                <li><a class="dropdown-item" href="/Client/ListProduct?sortOrder=3">Sort by average rating</a></li>
+                                <li><a class="dropdown-item" href="/Client/ListProduct?sortOrder=4">Sort by newness</a></li>
+                                <li><a class="dropdown-item" href="/Client/ListProduct?sortOrder=5">Sort by Price:low to high</a></li>
+                                <li><a class="dropdown-item" href="/Client/ListProduct?sortOrder=6">Sort by Price:high to low</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row ">
+                    @foreach (var item in Model)
+                    {
+                        <div class="pic col-md-4 mb-5">
+                            <div>
+                                <div class="img-top">
+                                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid " />
+                                    <div class="caption row">
+                                        <div class="blur"></div>
+                                        <div class="caption-text row text-center p-5">
+                                             <img class="col-md-3 img-fluid" src="https://banner2.cleanpng.com/20180329/soe/kisspng-shopping-cart-computer-icons-online-shopping-shopping-cart-5abcc5a2ec2168.4054516615223208029672.jpg" alt="Giỏ hàng" />
+                                            <p class="col-md-9"><b>ADD TO CARD</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 text-left">
+                                        <label>
+                                            @Html.ActionLink(item.nameProduct, "DetailProduct", new { id = item.idProduct }, new { @style = "text-decoration:none;color:black;" })
+                                        </label>
+                                        @*<label><a href="/CLient/DetailProduct?id=@item.idProduct">@item.nameProduct</a></label>*@
+                                    </div>
+                                    <div class="col-md-5 text-right row">
+                                        <img class="col-md-8" src="https://kenh14cdn.com/203336854389633024/2021/3/7/1-16150665630681271218913.jpg" alt="Dùng" />
+                                        <div class="col-md-4">
+                                            <span><strong>$@item.priceProduct</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row " style="border-top:1px solid; margin-left:1px;margin-right:1px;">
+                                    <div class="col-md-4 ">
+                                        @foreach (var item2 in liCategory)
+                                        {
+                                            if ((item.idCategory).Equals((item2.idCategory)))
+                                            {
+                                                <label><i>@item2.nameCategory</i></label>
+                                            }
+                                        }
+
+                                    </div>
+                                    <div class="col-md-8 text-right">
+
+                                        @for (int i = 0; i < item.rateProduct; i++)
+                                        {
+                                            <img src="https://icon-library.com/images/black-star-icon/black-star-icon-17.jpg" width="20px;" />
+                                        }
+                                        @for (int i = 0; i < (5 - item.rateProduct); i++)
+                                        {
+                                            <img src="https://png.pngtree.com/element_our/png_detail/20181227/star-line-black-icon-png_287224.jpg" width="20px;" alt="Star Line Black Icon, Star Icons, Line Icons, Black Icons PNG and Vector  with Transparent Background for Free Download" />
+                                        }
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+            <div class="contentright col-md-3 " style="border-right:0;">
+                @using (Html.BeginForm())
+                {
+                    <div class=" row">
+                        <div class="col-md-9 ">
+                            <p><input type="text" name="searchString" placeholder="SEARCH"></p>
+                        </div>
+                        <div class="col-md-3 ">
+                            <p>
+                                <button type="submit" style="background:white;border:0px;">
+                                    <img width="20px;" src="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png" alt="Search icon - Free download on Iconfinder" />
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                }
+
+                <div class="mt-5 row">
+                    <strong>CATEGORIES:</strong>
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    <div class="menu3 row">
+
+                        <ul>
+                            @foreach (var itemCate in liCategory)
+                            {
+                                <li>
+                                    <a style="color:black;" href="/Client/ListProduct?searchCate=@itemCate.nameCategory">
+                                        <span></span>
+                                        @itemCate.nameCategory
+                                    </a>
+
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                }
+
+                <div class="row">
+                    <strong>BEST PRODUCTS</strong>
+                </div>
+
+                @foreach (var item in liMax)
+                {
+                    <div class="row mt-5">
+                        <div class="col-md-4  ">
+                            <a href="#"><img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid " /></a>
+                        </div>
+                        <div class="menuProductMax col-md-8  ">
+                            <ul>
+                                <li><strong><u>@Html.ActionLink(item.nameProduct, "DetailProduct", new { id = item.idProduct }, new { @style = "text-decoration:none;color:black;" })t</u></strong></li>
+                                
+                                <li>
+                                    @for (int i = 0; i < item.rateProduct; i++)
+                                    {
+                                        <img src="https://icon-library.com/images/black-star-icon/black-star-icon-17.jpg" width="20px;" />
+                                    }
+                                    @for (int i = 0; i < (5 - item.rateProduct); i++)
+                                    {
+                                        <img src="https://png.pngtree.com/element_our/png_detail/20181227/star-line-black-icon-png_287224.jpg" width="20px;" alt="Star Line Black Icon, Star Icons, Line Icons, Black Icons PNG and Vector  with Transparent Background for Free Download" />
+                                    }
+
+                                </li>
+                                <li>
+                                    <strong>$@item.priceProduct</strong>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                }
+
+                <div class="row mt-5">
+                    <strong>BANNER:</strong>
+                </div>
+                <div class="picturebanner row mt-5">
+                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/shop-sidebar-banner-img.jpg" class="img-fluid" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+

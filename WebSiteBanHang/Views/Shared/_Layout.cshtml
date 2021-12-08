@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site.css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body {
+            padding: 0px;
+        }
+
+        ul li a:hover {
+            background: blue;
+            color: red;
+        }
+
+        .header {
+            height: 60px;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+    <div  >
+        <div class="header row d-flex justify-content-center align-items-center">
+            <div class="pic d-flex  align-items-center justify-content-center col-md-2 ">
+                <img src="http://devfast.us/images/devfast-logo.png" width="40px;" />
+            </div>
+            <div class="text-center col-md-10">
+                <h3 style="color:white">blogs management</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="navbar navbar-expand-lg navbar-light bg-light">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("MANAGEMENT STORE", "Index", "Products", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Product", "Index", "Products", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Category", "Index", "Categories", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("User", "Index", "UserProducts", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                      <a class="navbar-brand" href="/Client/ListProduct" >Client</a>  @*@Html.ActionLink("Client", "ListProduct", "Client", new { @class = "navbar-brand" })*@
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div>
+       @RenderBody()
+    </div>
+    <div class="row">
+        <div class="text-center d-flex justify-content-center align-items-center" style="background: #808080; width:100%;height:50px;">
+            <span>Copyright @@ 2021</span><span style="color:blue;">Devfast</span>
+        </div>
+    </div>
+    
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

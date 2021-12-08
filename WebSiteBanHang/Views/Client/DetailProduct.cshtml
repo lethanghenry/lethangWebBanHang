@@ -1,0 +1,378 @@
+﻿@model WebSiteBanHang.Models.Product
+@using WebSiteBanHang.Models;
+@{
+    ViewBag.Title = "DetailProduct";
+    Layout = "~/Views/Shared/_Layout_Client.cshtml";
+    List<Product> liProduct = ViewBag.listPro as List<Product>;
+    List<Category> liCategory = ViewBag.listCate as List<Category>;
+    List<UserProduct> liUser = ViewBag.lisUser as List<UserProduct>;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<style>
+
+    .picturebanner {
+        overflow: hidden;
+    }
+
+        .picturebanner img {
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .picturebanner:hover img {
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+
+    .img-fluid {
+        z-index: 4;
+        float: left;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .img-top:hover .caption {
+        opacity: 1;
+        transform: translateY(-100px);
+        -webkit-transform: translateY(-120px);
+        -moz-transform: translateY(0px);
+        -ms-transform: translateY(-100px);
+        -o-transform: translateY(-100px);
+    }
+
+    .caption {
+        cursor: pointer;
+        position: absolute;
+        opacity: 0;
+        top: 300px;
+        left: 30px;
+        -webkit-transition: all 0.15s ease-in-out;
+        -moz-transition: all 0.15s ease-in-out;
+        -o-transition: all 0.15s ease-in-out;
+        /* -ms-transition: all 0.15s ease-in-out;*/
+
+        transition: all 0.15s ease-in-out;
+    }
+
+    .blur {
+        background-color: black;
+        height: 80px;
+        width: 260px;
+        z-index: 5;
+        position: absolute;
+    }
+
+    .caption-text p {
+        color: white;
+    }
+
+    .caption-text {
+        z-index: 8;
+        position: relative;
+    }
+
+    .banner {
+        height: 100px;
+        margin-bottom: 50px;
+    }
+
+    .btn1 {
+        background: black;
+        color: white;
+    }
+
+        .btn1:hover {
+            background: white;
+            color: black;
+        }
+
+    .zoom1 {
+        height: 165px;
+        width: 190px;
+        overflow: hidden;
+        background: #f5f5f5;
+    }
+
+        .zoom1 img {
+            height: 350px;
+            width: 450px;
+            object-fit: none;
+            margin: 0px 0px 0px 30px;
+        }
+
+
+    .zoom2 {
+        height: 165px;
+        width: 190px;
+        overflow: hidden;
+        background: #f5f5f5;
+    }
+
+        .zoom2 img {
+            height: 350px;
+            width: 450px;
+            object-fit: none;
+            margin: 0px 0px 0px -50px;
+        }
+
+    .zoom3 {
+        height: 165px;
+        width: 190px;
+        overflow: hidden;
+        background: #f5f5f5;
+    }
+
+        .zoom3 img {
+            height: 350px;
+            width: 450px;
+            object-fit: none;
+            margin: -200px 0px 0px 50px;
+        }
+</style>
+@using (Html.BeginForm())
+{
+    <div>
+        <div class="banner row d-flex justify-content-center align-items-center ">
+            <div class="col-md-9 text-left p-0">
+                <h1><strong class="a">SHOP</strong></h1>
+            </div>
+            <div class="col-md-3 text-right p-0">
+                <h4>
+                    Home/Shop/
+                    <a style="color:black;" href="/Client/ListProduct?searchCate=@Model.Category.nameCategory">@Model.Category.nameCategory</a>
+                    /@Model.nameProduct
+                </h4>
+            </div>
+        </div>
+        <div class="content1 row  mb-5">
+            <div class="col-md-2">
+                <div class="row zoom1 mb-5">
+                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid" />
+                </div>
+                <div class="row zoom2 mb-5">
+                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid" />
+                </div>
+                <div class="row zoom3 ">
+                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class=" img-fluid w-100" />
+            </div>
+            <div class="col-md-4">
+                <h1>@Model.nameProduct</h1>
+                <h4>$@Model.priceProduct</h4>
+                <h3>
+                    @for (int i = 0; i < Model.rateProduct; i++)
+                    {
+                        <img src="https://icon-library.com/images/black-star-icon/black-star-icon-17.jpg" width="20px;" />
+                    }
+                    @for (int i = 0; i < (5 - Model.rateProduct); i++)
+                    {
+                        <img src="https://png.pngtree.com/element_our/png_detail/20181227/star-line-black-icon-png_287224.jpg" width="20px;" alt="Star Line Black Icon, Star Icons, Line Icons, Black Icons PNG and Vector  with Transparent Background for Free Download" />
+                    }
+                </h3>
+                <h4>@Model.descriptionProduct</h4>
+                <h4><strong>SKU:</strong> @Model.idProduct</h4>
+                <h4><strong>Category:</strong>@Model.Category.nameCategory</h4>
+                <div class="row ">
+                    <div class="col-md-2">
+                        <strong>Share:</strong>
+                    </div>
+
+                    <div class="col-md-1">
+                        <img src="https://www.vhv.rs/dpng/d/80-808195_youtube-black-and-white-icons-png-transparent-png.png" alt="Youtube Black And White Icons Png, Transparent Png - vhv" width="20" height="20" />
+                    </div>
+                    <div class="col-md-1">
+                        <img src="https://i.pinimg.com/736x/7c/cb/40/7ccb40e2fa23d39346cc9dc8691d68b3.jpg" alt="Facebook Logo Red Transparent - Fb Icon White Png Clipart in 2021 | Facebook  logo transparent, Facebook and instagram logo, Facebook icons" width="20" height="20" />
+                    </div>
+                    <div class="col-md-1">
+                        <img src="https://e7.pngegg.com/pngimages/46/1008/png-clipart-computer-icons-twitter-leaf-logo.png" alt="Silhouette Computer Icons Twitter, twitter, logo, monochrome png | PNGEgg" width="20" height="20" />
+                    </div>
+                    <div class="col-md-1">
+                        <img src="https://img.favpng.com/18/3/11/computer-icons-linkedin-png-favpng-GgCihq48SAGYiUvbtXCDyZ2m8.jpg" alt="LinkedIn, PNG, 2048x2048px, Linkedin, Black And White, Brand, Logo, Symbol  Download Free" width="20" height="20" />
+                    </div>
+                </div>
+                <div class="row pt-5">
+                    <div class="col-md-3">
+
+                        <input type="number" value="qualityProduct" name="qualityProduct" class="w-100" />
+                    </div>
+                    <div class="col-md-5">
+                        <button type="button" class="btn1 btn btn-outline-dark w-100">ADD TO CARD</button>
+                    </div>
+                </div>
+                <div class="row pt-5">
+                    <div class="col-md-3">
+                        <img width="20px;" src="https://kenh14cdn.com/203336854389633024/2021/3/7/1-16150665630681271218913.jpg" />
+                    </div>
+                    <div class="col-md-5">
+                        <a href="#" style="color:black;"><strong>ADD TO WISHLIST</strong></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="content2 row">
+            <div class="col-md-5">
+                <div id="exTab1" class="container">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#1a" data-toggle="tab"><strong>DESCRIPTION</strong></a>
+                        </li>
+                        <li>
+                            <a href="#2a" data-toggle="tab"><strong>ADDITIONAL INFORMATION</strong></a>
+                        </li>
+                        <li>
+                            <a href="#3a" data-toggle="tab"><strong>REVIEW</strong></a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="1a">
+                            <h3>@Model.descriptionProduct</h3>
+                        </div>
+                        <div class="tab-pane" id="2a">
+                            <div class="row">
+                                <strong>Weight:@Model.weightProduct kg</strong>
+                            </div>
+                            <div class="row">
+                                <strong>Demensions: @Model.descriptionProduct cm</strong>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="3a">
+                            <h4><strong>REVIEW FOR @Model.nameProduct</strong></h4>
+                            <h4><strong>@Model.UserProduct.nameUser</strong> </h4>
+                            <h3><strong>Add a review</strong></h3>
+                            <h4>
+                                Your email address will not be published. Required fields are marked *
+                            </h4>
+                            <h4>
+                                Your rating
+                            </h4>
+                            <h4>@Model.UserProduct.reviewUser</h4>
+                            <h4>@Model.UserProduct.emailUser</h4>
+                            <div class="row">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <img src="https://png.pngtree.com/element_our/png_detail/20181227/star-line-black-icon-png_287224.jpg" style="width:40px;height:40px;" alt="Star " />
+                                }
+                            </div>
+                            <div class="row">
+                                Your review*
+                            </div>
+                            <div class="row">
+                                <textarea cols="5" id="@Model.UserProduct.reviewUser" name="@Model.UserProduct.reviewUser" rows="10"></textarea>
+                            </div>
+                            <div class="row">
+                                Name*
+                            </div>
+                            <div class="row">
+                                <textarea cols="5" id="@Model.UserProduct.nameUser" name="@Model.UserProduct.nameUser" rows="2"></textarea>
+                            </div>
+                            <div class="row">
+                                Email*
+                            </div>
+                            <div class="row">
+                                <textarea cols="5" id="@Model.UserProduct.emailUser" name="@Model.UserProduct.emailUser" rows="2"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="checkbox" /><label>Save my name, email, and website in this browser for the next time I comment.</label>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button type="button" class="btn1 btn btn-outline-dark w-100">SUBMIT</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer2 row">
+            <div class="row" style="border-bottom:1px solid;">
+                <h3>
+                    <strong>RELATED PRODUCTS</strong>
+                </h3>
+            </div>
+            <div class="row mt-5 mb-5">
+                @{
+                    int count = 0;
+                    foreach (var item in liProduct)
+                    {
+                        count++;
+                        if (count < 5)
+                        {
+                            <div class="pic col-md-3 mb-5">
+                                <div>
+                                    <div class="img-top">
+                                        <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid " />
+                                        <div class="caption row">
+                                            <div class="blur"></div>
+                                            <div class="caption-text row text-center p-5">
+                                                <img class="col-md-3 img-fluid" src="https://banner2.cleanpng.com/20180329/soe/kisspng-shopping-cart-computer-icons-online-shopping-shopping-cart-5abcc5a2ec2168.4054516615223208029672.jpg" alt="Giỏ hàng" />
+
+                                                <p class="col-md-9"><b>ADD TO CARD</b></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7 text-left">
+                                            <label>
+                                                @Html.ActionLink(item.nameProduct, "DetailProduct", new { id = item.idProduct }, new { @style = "text-decoration:none;color:black;" })
+                                            </label>
+
+                                        </div>
+                                        <div class="col-md-5 text-right row">
+                                            <img class="col-md-8" src="https://kenh14cdn.com/203336854389633024/2021/3/7/1-16150665630681271218913.jpg" alt="Dùng" />
+                                            <div class="col-md-4">
+                                                <span><strong>$@item.priceProduct</strong></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row " style="border-top:1px solid; margin-left:1px;margin-right:1px;">
+                                        <div class="col-md-4 ">
+                                            @foreach (var item2 in liCategory)
+                                            {
+                                                if ((item.idCategory).Equals((item2.idCategory)))
+                                                {
+                                                    <label><i>@item2.nameCategory</i></label>
+                                                }
+                                            }
+
+                                        </div>
+                                        <div class="col-md-8 text-right">
+
+                                            @for (int i = 0; i < item.rateProduct; i++)
+                                            {
+                                                <img src="https://icon-library.com/images/black-star-icon/black-star-icon-17.jpg" width="20px;" />
+                                            }
+                                            @for (int i = 0; i < (5 - item.rateProduct); i++)
+                                            {
+                                                <img src="https://png.pngtree.com/element_our/png_detail/20181227/star-line-black-icon-png_287224.jpg" width="20px;" alt="Star Line Black Icon, Star Icons, Line Icons, Black Icons PNG and Vector  with Transparent Background for Free Download" />
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+
