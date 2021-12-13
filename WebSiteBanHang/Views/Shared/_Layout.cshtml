@@ -15,12 +15,6 @@
         body {
             padding: 0px;
         }
-
-        ul li a:hover {
-            background: blue;
-            color: red;
-        }
-
         .header {
             height: 60px;
             background: black;
@@ -38,31 +32,62 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="navbar navbar-expand-lg navbar-light bg-light">
-                <ul class="nav navbar-nav">
-                    <li>
-                        @Html.ActionLink("MANAGEMENT STORE", "Index", "Products", new { area = "" }, new { @class = "navbar-brand" })
-                    </li>
-                    <li>
-                        @Html.ActionLink("Product", "Index", "Products", new { area = "" }, new { @class = "navbar-brand" })
-                    </li>
-                    <li>
-                        @Html.ActionLink("Category", "Index", "Categories", new { area = "" }, new { @class = "navbar-brand" })
-                    </li>
-                    <li>
-                        @Html.ActionLink("User", "Index", "UserProducts", new { area = "" }, new { @class = "navbar-brand" })
-                    </li>
-                    <li>
-                      <a class="navbar-brand" href="/Client/ListProduct" >Client</a>  @*@Html.ActionLink("Client", "ListProduct", "Client", new { @class = "navbar-brand" })*@
-                    </li>
-                </ul>
-            </div>
-        </div>
+       
+
     </div>
 
-    <div>
-       @RenderBody()
+    <div class="row">
+        <div class="menu col-md-3">
+            <ul>
+                <li >
+                    @Html.ActionLink("Product", "Index", "Products")
+                    <ul class="menu2">
+                        <li>
+                            <a id="home" href="/Products/index"><img src="https://hoclaptrinh.asia/wp-content/uploads/2020/04/menu-icon-la-gi-1.jpg" style=" width:20px; height:20px; margin-right:10px;" />list</a>
+                        </li>
+                        <li>
+                            <a id="Create" href="/Products/Create"><img src="https://www.nicepng.com/png/detail/202-2022683_edit-svg-png-icon-free-download-create-icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />New</a>
+                        </li>
+                        <li>
+                            <a id="Search" href="/Products/Search"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Search_Icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />Search</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    @Html.ActionLink("Category", "Index", "Categories")
+                    <ul class="menu3">
+                        <li>
+                            <a id="home" href="/Categories/index"><img src="https://hoclaptrinh.asia/wp-content/uploads/2020/04/menu-icon-la-gi-1.jpg" style=" width:20px; height:20px; margin-right:10px;" />list</a>
+                        </li>
+                        <li>
+                            <a id="Create" href="/Categories/Create"><img src="https://www.nicepng.com/png/detail/202-2022683_edit-svg-png-icon-free-download-create-icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />New</a>
+                        </li>
+                        <li>
+                            <a id="Search" href="/Categories/Search"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Search_Icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />Search</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    @Html.ActionLink("User", "Index", "UserProducts")
+                    <ul class="menu4">
+                        <li>
+                            <a id="home" href="/UserProducts/index"><img src="https://hoclaptrinh.asia/wp-content/uploads/2020/04/menu-icon-la-gi-1.jpg" style=" width:20px; height:20px; margin-right:10px;" />list</a>
+                        </li>
+                        <li>
+                            <a id="Create" href="/UserProducts/Create"><img src="https://www.nicepng.com/png/detail/202-2022683_edit-svg-png-icon-free-download-create-icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />New</a>
+                        </li>
+                        <li>
+                            <a id="Search" href="/UserProducts/Search"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Search_Icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />Search</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+      
     </div>
     <div class="row">
         <div class="text-center d-flex justify-content-center align-items-center" style="background: #808080; width:100%;height:50px;">

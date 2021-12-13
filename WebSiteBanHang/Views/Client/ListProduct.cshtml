@@ -41,11 +41,6 @@
         margin: 0px;
     }
 
-    /*    .danhsach {
-            padding-right: 0px;
-            margin: 0px;
-        }
-    */
     .dropdown {
         height: 50px;
         background: white;
@@ -131,8 +126,6 @@
         -webkit-transition: all 0.15s ease-in-out;
         -moz-transition: all 0.15s ease-in-out;
         -o-transition: all 0.15s ease-in-out;
-        /* -ms-transition: all 0.15s ease-in-out;*/
-
         transition: all 0.15s ease-in-out;
     }
 
@@ -152,6 +145,12 @@
         z-index: 8;
         position: relative;
     }
+
+    .show {
+        padding-top: 0;
+        float: none;
+        display: inline-block !important;
+    }
 </style>
 
 @using (Html.BeginForm())
@@ -170,15 +169,28 @@
             <div class="contentleft col-md-9">
                 <div class="funcontentleft row ">
                     <div class="show col-md-4 text-left ">
-                        <label>Showing 1-12 of 78 result</label>
+                        @{ int countProduct = 0;
+                            foreach (var item in liProduct)
+                            {
+                                countProduct++;
+                            }
+                        }
+                        @{ int countProduct2 = 0;
+                            foreach (var item in Model)
+                            {
+                                countProduct2++;
+                            }
+                        }
+
+                        <label>Showing @countProduct2 of @countProduct result </label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
 
                     </div>
-                    <div class="col-md-2 text-right">
+                    <div class="col-md-3 text-right">
                         <div class="dropdown text-right">
                             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Default Sort
+                                @ViewBag.nameSortProduct
                             </button>
                             <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="/Client/ListProduct?sortOrder=1">Default Sort</a></li>
@@ -198,11 +210,15 @@
                         <div class="pic col-md-4 mb-5">
                             <div>
                                 <div class="img-top">
-                                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid " />
+                                    @{
+                                        string ImagePath = "~/wwwroot/dataImage/" + item.pictureProduct;
+                                    }
+
+                                    <img src="@Url.Content(ImagePath)" width="262" height="262" class="img-fluid " />
                                     <div class="caption row">
                                         <div class="blur"></div>
                                         <div class="caption-text row text-center p-5">
-                                             <img class="col-md-3 img-fluid" src="https://banner2.cleanpng.com/20180329/soe/kisspng-shopping-cart-computer-icons-online-shopping-shopping-cart-5abcc5a2ec2168.4054516615223208029672.jpg" alt="Giỏ hàng" />
+                                            <img class="col-md-3 img-fluid" src="https://banner2.cleanpng.com/20180329/soe/kisspng-shopping-cart-computer-icons-online-shopping-shopping-cart-5abcc5a2ec2168.4054516615223208029672.jpg" alt="Giỏ hàng" />
                                             <p class="col-md-9"><b>ADD TO CARD</b></p>
                                         </div>
                                     </div>
@@ -212,7 +228,6 @@
                                         <label>
                                             @Html.ActionLink(item.nameProduct, "DetailProduct", new { id = item.idProduct }, new { @style = "text-decoration:none;color:black;" })
                                         </label>
-                                        @*<label><a href="/CLient/DetailProduct?id=@item.idProduct">@item.nameProduct</a></label>*@
                                     </div>
                                     <div class="col-md-5 text-right row">
                                         <img class="col-md-8" src="https://kenh14cdn.com/203336854389633024/2021/3/7/1-16150665630681271218913.jpg" alt="Dùng" />
@@ -302,12 +317,16 @@
                 {
                     <div class="row mt-5">
                         <div class="col-md-4  ">
-                            <a href="#"><img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid " /></a>
+                            @{
+                                string ImagePath = "~/wwwroot/dataImage/" + item.pictureProduct;
+                            }
+
+                            <a href="#"><img src="@Url.Content(ImagePath)" class="img-fluid " /></a>
                         </div>
                         <div class="menuProductMax col-md-8  ">
                             <ul>
                                 <li><strong><u>@Html.ActionLink(item.nameProduct, "DetailProduct", new { id = item.idProduct }, new { @style = "text-decoration:none;color:black;" })t</u></strong></li>
-                                
+
                                 <li>
                                     @for (int i = 0; i < item.rateProduct; i++)
                                     {

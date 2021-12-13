@@ -5,24 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>search</h2>
-
-
 <div class="row">
-    <div class="menu justify-content-center col-md-2">
-        <ul>
-            <li>
-                <a id="home" href="/Products/index"><img src="https://hoclaptrinh.asia/wp-content/uploads/2020/04/menu-icon-la-gi-1.jpg" style=" width:20px; height:20px; margin-right:10px;" />list</a>
-            </li>
-            <li>
-                <a id="Create" href="/Products/Create"><img src="https://www.nicepng.com/png/detail/202-2022683_edit-svg-png-icon-free-download-create-icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />New</a>
-            </li>
-            <li>
-                <a id="Search" href="/Products/Search"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Search_Icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />Search</a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-md-10">
         <div class="card">
             <div class="card-header">
                 <h3>Search</h3>
@@ -31,7 +14,7 @@
                 @using (Html.BeginForm())
                 {
                     <div class="row align-items-center">
-                        <label class="col-2">Name Product:</label>
+                        <label class="col-2">Name:</label>
                         <div class="col-sm-10 mb-3">
                             <input name="searchNameProduct" type="text" class="form-control" style="max-width: 100%" />
                         </div>
@@ -50,26 +33,23 @@
                 <table class="table" border="0">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Category.nameCategory)
+                            @Html.DisplayName("name")
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.nameProduct)
+                            @Html.DisplayName("picture")
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.pictureProduct)
+                            @Html.DisplayName("price")
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.priceProduct)
+                            @Html.DisplayName("rate")
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.rateProduct)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.qualityProduct)
+                            @Html.DisplayName("quality")
                         </th>
 
                         <th>
-                            @Html.DisplayNameFor(model => model.weightProduct)
+                            @Html.DisplayName("weight")
                         </th>
 
                         <th>
@@ -83,9 +63,6 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Category.nameCategory)
-                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.nameProduct)
                             </td>
@@ -119,5 +96,4 @@
             </div>
 
         </div>
-    </div>
 </div>

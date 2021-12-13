@@ -5,22 +5,6 @@
 }
 
 <div class="row">
-    <div class="menu justify-content-center col-md-2">
-
-        <ul>
-            <li>
-                <a id="home" href="/UserProducts/index"><img src="https://hoclaptrinh.asia/wp-content/uploads/2020/04/menu-icon-la-gi-1.jpg" style=" width:20px; height:20px; margin-right:10px;" />list</a>
-            </li>
-            <li>
-                <a id="Create" href="/UserProducts/Create"><img src="https://www.nicepng.com/png/detail/202-2022683_edit-svg-png-icon-free-download-create-icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />New</a>
-            </li>
-            <li>
-                <a id="Search" href="/UserProducts/Search"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Search_Icon.png" style="width: 20px; height: 20px; margin-right: 10px;" />Search</a>
-            </li>
-        </ul>
-
-    </div>
-    <div class="col-md-10">
         <div class="card">
             <div class="card-header">
                 <h3>Search</h3>
@@ -29,7 +13,7 @@
                 @using (Html.BeginForm())
                 {
                     <div class="row align-items-center">
-                        <label class="col-2">Name User:</label>
+                        <label class="col-2">Name:</label>
                         <div class="col-sm-10 mb-3">
 
                             <input name="searchNameUser" type="text" class="form-control" style="max-width: 100%" />
@@ -51,13 +35,13 @@
                 <table class="table">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.reviewUser)
+                            @Html.DisplayName("review")
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.nameUser)
+                            @Html.DisplayName("name")
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.emailUser)
+                            @Html.DisplayName("email")
                         </th>
                         <th>
                             @Html.Label("Edit")
@@ -90,7 +74,7 @@
                 </table>
             </div>
         </div>
-    </div>
+
 </div>
 
 

@@ -6,11 +6,11 @@
     List<Product> liProduct = ViewBag.listPro as List<Product>;
     List<Category> liCategory = ViewBag.listCate as List<Category>;
     List<UserProduct> liUser = ViewBag.lisUser as List<UserProduct>;
+
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <style>
-
     .picturebanner {
         overflow: hidden;
     }
@@ -91,7 +91,7 @@
         height: 165px;
         width: 190px;
         overflow: hidden;
-        background: #f5f5f5;
+        border: 1px solid;
     }
 
         .zoom1 img {
@@ -101,12 +101,11 @@
             margin: 0px 0px 0px 30px;
         }
 
-
     .zoom2 {
         height: 165px;
         width: 190px;
         overflow: hidden;
-        background: #f5f5f5;
+        border: 1px solid;
     }
 
         .zoom2 img {
@@ -120,7 +119,7 @@
         height: 165px;
         width: 190px;
         overflow: hidden;
-        background: #f5f5f5;
+        border: 1px solid;
     }
 
         .zoom3 img {
@@ -132,14 +131,17 @@
 </style>
 @using (Html.BeginForm())
 {
+    string ImagePath = "~/wwwroot/dataImage/" + Model.pictureProduct;
     <div>
         <div class="banner row d-flex justify-content-center align-items-center ">
-            <div class="col-md-9 text-left p-0">
+            <div class="col-md-7 text-left p-0">
                 <h1><strong class="a">SHOP</strong></h1>
             </div>
-            <div class="col-md-3 text-right p-0">
+            <div class="col-md-5 text-right p-0">
                 <h4>
-                    Home/Shop/
+                    Home/
+                    <a style="color:black;" href="/Client/ListProduct">Shop</a>
+                    /
                     <a style="color:black;" href="/Client/ListProduct?searchCate=@Model.Category.nameCategory">@Model.Category.nameCategory</a>
                     /@Model.nameProduct
                 </h4>
@@ -148,17 +150,17 @@
         <div class="content1 row  mb-5">
             <div class="col-md-2">
                 <div class="row zoom1 mb-5">
-                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid" />
+                    <img src="@Url.Content(ImagePath)" class="img-fluid" />
                 </div>
                 <div class="row zoom2 mb-5">
-                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid" />
+                    <img src="@Url.Content(ImagePath)" class="img-fluid" />
                 </div>
                 <div class="row zoom3 ">
-                    <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid" />
+                    <img src="@Url.Content(ImagePath)" class="img-fluid" />
                 </div>
             </div>
-            <div class="col-md-6">
-                <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class=" img-fluid w-100" />
+            <div class="col-md-6 ">
+                <img src="@Url.Content(ImagePath)" class=" img-fluid w-100" />
             </div>
             <div class="col-md-4">
                 <h1>@Model.nameProduct</h1>
@@ -180,7 +182,6 @@
                     <div class="col-md-2">
                         <strong>Share:</strong>
                     </div>
-
                     <div class="col-md-1">
                         <img src="https://www.vhv.rs/dpng/d/80-808195_youtube-black-and-white-icons-png-transparent-png.png" alt="Youtube Black And White Icons Png, Transparent Png - vhv" width="20" height="20" />
                     </div>
@@ -211,7 +212,6 @@
                         <a href="#" style="color:black;"><strong>ADD TO WISHLIST</strong></a>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="content2 row">
@@ -227,9 +227,7 @@
                         <li>
                             <a href="#3a" data-toggle="tab"><strong>REVIEW</strong></a>
                         </li>
-
                     </ul>
-
                     <div class="tab-content clearfix">
                         <div class="tab-pane active" id="1a">
                             <h3>@Model.descriptionProduct</h3>
@@ -288,11 +286,8 @@
                                 <div class="col-md-2">
                                     <button type="button" class="btn1 btn btn-outline-dark w-100">SUBMIT</button>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -306,66 +301,68 @@
             <div class="row mt-5 mb-5">
                 @{
                     int count = 0;
+                    string searchCate = Model.Category.idCategory;
                     foreach (var item in liProduct)
                     {
-                        count++;
-                        if (count < 5)
+                        if (item.idCategory.Equals(searchCate))
                         {
-                            <div class="pic col-md-3 mb-5">
-                                <div>
-                                    <div class="img-top">
-                                        <img src="https://trackstore.qodeinteractive.com/wp-content/uploads/2017/10/masonry-wide-shop-img-10-300x300.jpg" class="img-fluid " />
-                                        <div class="caption row">
-                                            <div class="blur"></div>
-                                            <div class="caption-text row text-center p-5">
-                                                <img class="col-md-3 img-fluid" src="https://banner2.cleanpng.com/20180329/soe/kisspng-shopping-cart-computer-icons-online-shopping-shopping-cart-5abcc5a2ec2168.4054516615223208029672.jpg" alt="Giỏ hàng" />
+                            count++;
+                            if (count < 5)
+                            {
+                                <div class="pic col-md-3 mb-5">
+                                    <div>
+                                        <div class="img-top">
+                                            @{
+                                                string ImagePath2 = "~/wwwroot/dataImage/" + item.pictureProduct;
+                                            }
+                                            <img src="@Url.Content(ImagePath2)" width="262" height="262" class="img-fluid " />
+                                            <div class="caption row">
+                                                <div class="blur"></div>
+                                                <div class="caption-text row text-center p-5">
+                                                    <img class="col-md-3 img-fluid" src="https://banner2.cleanpng.com/20180329/soe/kisspng-shopping-cart-computer-icons-online-shopping-shopping-cart-5abcc5a2ec2168.4054516615223208029672.jpg" alt="Giỏ hàng" />
 
-                                                <p class="col-md-9"><b>ADD TO CARD</b></p>
+                                                    <p class="col-md-9"><b>ADD TO CARD</b></p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-7 text-left">
-                                            <label>
-                                                @Html.ActionLink(item.nameProduct, "DetailProduct", new { id = item.idProduct }, new { @style = "text-decoration:none;color:black;" })
-                                            </label>
+                                        <div class="row">
+                                            <div class="col-md-7 text-left">
+                                                <label>
+                                                    @Html.ActionLink(item.nameProduct, "DetailProduct", new { id = item.idProduct }, new { @style = "text-decoration:none;color:black;" })
+                                                </label>
 
-                                        </div>
-                                        <div class="col-md-5 text-right row">
-                                            <img class="col-md-8" src="https://kenh14cdn.com/203336854389633024/2021/3/7/1-16150665630681271218913.jpg" alt="Dùng" />
-                                            <div class="col-md-4">
-                                                <span><strong>$@item.priceProduct</strong></span>
+                                            </div>
+                                            <div class="col-md-5 text-right row">
+                                                <img class="col-md-8" src="https://kenh14cdn.com/203336854389633024/2021/3/7/1-16150665630681271218913.jpg" alt="Dùng" />
+                                                <div class="col-md-4">
+                                                    <span><strong>$@item.priceProduct</strong></span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row " style="border-top:1px solid; margin-left:1px;margin-right:1px;">
-                                        <div class="col-md-4 ">
-                                            @foreach (var item2 in liCategory)
-                                            {
-                                                if ((item.idCategory).Equals((item2.idCategory)))
+                                        <div class="row " style="border-top:1px solid; margin-left:1px;margin-right:1px;">
+                                            <div class="col-md-4 ">
+                                                @foreach (var item2 in liCategory)
                                                 {
-                                                    <label><i>@item2.nameCategory</i></label>
+                                                    if ((item.idCategory).Equals((item2.idCategory)))
+                                                    {
+                                                        <label><i>@item2.nameCategory</i></label>
+                                                    }
                                                 }
-                                            }
-
-                                        </div>
-                                        <div class="col-md-8 text-right">
-
-                                            @for (int i = 0; i < item.rateProduct; i++)
-                                            {
-                                                <img src="https://icon-library.com/images/black-star-icon/black-star-icon-17.jpg" width="20px;" />
-                                            }
-                                            @for (int i = 0; i < (5 - item.rateProduct); i++)
-                                            {
-                                                <img src="https://png.pngtree.com/element_our/png_detail/20181227/star-line-black-icon-png_287224.jpg" width="20px;" alt="Star Line Black Icon, Star Icons, Line Icons, Black Icons PNG and Vector  with Transparent Background for Free Download" />
-                                            }
-
-
+                                            </div>
+                                            <div class="col-md-8 text-right">
+                                                @for (int i = 0; i < item.rateProduct; i++)
+                                                {
+                                                    <img src="https://icon-library.com/images/black-star-icon/black-star-icon-17.jpg" width="20px;" />
+                                                }
+                                                @for (int i = 0; i < (5 - item.rateProduct); i++)
+                                                {
+                                                    <img src="https://png.pngtree.com/element_our/png_detail/20181227/star-line-black-icon-png_287224.jpg" width="20px;" alt="Star Line Black Icon, Star Icons, Line Icons, Black Icons PNG and Vector  with Transparent Background for Free Download" />
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
+                            }
                         }
                     }
                 }

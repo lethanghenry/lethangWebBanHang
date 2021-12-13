@@ -65,10 +65,20 @@ namespace WebSiteBanHang.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProduct,nameProduct,pictureProduct,priceProduct,rateProduct,qualityProduct,descriptionProduct,weightProduct,dismensionProduct,idCategory,idUser")] Product product)
+        public ActionResult Create( Product product)
         {
             if (ModelState.IsValid)
             {
+                product.pictureProduct = "";
+                var f = Request.Files["ImageFile"];
+                if(f!=null&&f.ContentLength>0)
+                {
+                    string FileName = System.IO.Path.GetFileName(f.FileName);
+                    string UploadPath = Server.MapPath("~/wwwroot/dataImage/"+FileName);
+                    f.SaveAs(UploadPath);
+                    product.pictureProduct = FileName;
+                    
+                }    
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -115,6 +125,15 @@ namespace WebSiteBanHang.Controllers
         {
             if (ModelState.IsValid)
             {
+                product.pictureProduct = "";
+                var f = Request.Files["ImageFile"];
+                if (f != null && f.ContentLength > 0)
+                {
+                    string FileName = System.IO.Path.GetFileName(f.FileName);
+                    string UploadPath = Server.MapPath("~/wwwroot/dataImage/" + FileName);
+                    f.SaveAs(UploadPath);
+                    product.pictureProduct = FileName;
+                }
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
